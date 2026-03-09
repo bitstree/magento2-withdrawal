@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+ * Copyright (C) 2026 by BitsTree GmbH - All Rights Reserved
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="BitsTree_Withdrawal::css/withdrawal.css"/>
+    </head>
+    <body>
+        <referenceContainer name="sales.order.history.extra.column.header">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="bitstree.withdrawal.history.header"
+                   template="BitsTree_Withdrawal::order/history/column-header.phtml"/>
+        </referenceContainer>
+        <referenceBlock name="sales.order.history.extra.container">
+            <block class="BitsTree\Withdrawal\Block\Order\History\WithdrawalButton"
+                   name="bitstree.withdrawal.history.button"
+                   template="BitsTree_Withdrawal::order/history/withdrawal-button.phtml"/>
+        </referenceBlock>
+    </body>
+</page>

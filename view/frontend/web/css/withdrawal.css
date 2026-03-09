@@ -1,0 +1,10 @@
+.bitstree-withdrawal-form {
+    display: inline-block;
+}
+
+.bitstree-withdrawal-form button.action.bitstree-withdrawal-btn {
+    cursor: pointer;
+    background-color: #BCE4FA !important;
+    border-color: #BCE4FA !important;
+    color: #333 !important;
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+ * Copyright (C) 2026 by BitsTree GmbH - All Rights Reserved
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="admin">
+        <route id="bitstree_withdrawal" frontName="bitstree_withdrawal">
+            <module name="BitsTree_Withdrawal"/>
+        </route>
+    </router>
+</config>

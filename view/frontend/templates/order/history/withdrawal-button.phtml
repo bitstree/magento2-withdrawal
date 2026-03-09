@@ -1,0 +1,36 @@
+<?php
+/**
+ * NOTICE OF LICENSE & COPYRIGHT
+ *
+ * Copyright (C) 2026 by BitsTree GmbH - All Rights Reserved
+ *
+ * @var \BitsTree\Withdrawal\Block\Order\History\WithdrawalButton $block
+ */
+
+$order = $block->getOrder();
+if (!$order || !$block->canShowButton($order)) {
+    ?><td class="col withdrawal">&nbsp;</td><?php
+    return;
+}
+
+$submitUrl = $block->escapeUrl($block->getSubmitUrl($order));
+$confirmMessage = $block->escapeJs($block->getConfirmationMessage());
+$formKey = $block->getFormKey();
+$formId = 'withdrawal-form-history-' . (int) $order->getEntityId();
+?>
+<td class="col withdrawal">
+    <form id="<?= $block->escapeHtmlAttr($formId) ?>"
+          action="<?= $submitUrl ?>"
+          method="post"
+          class="bitstree-withdrawal-form">
+        <input type="hidden" name="form_key" value="<?= $block->escapeHtmlAttr($formKey) ?>"/>
+        <button type="button"
+                class="action withdrawal bitstree-withdrawal-btn"
+                data-mage-init='{"BitsTree_Withdrawal/js/withdrawal-confirm": {
+                    "message": "<?= $confirmMessage ?>",
+                    "formId": "<?= $block->escapeHtmlAttr($formId) ?>"
+                }}'>
+            <span><?= $block->escapeHtml(__('Submit Withdrawal')) ?></span>
+        </button>
+    </form>
+</td>

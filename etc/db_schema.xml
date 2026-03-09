@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+ * Copyright (C) 2026 by BitsTree GmbH - All Rights Reserved
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="bitstree_withdrawal" resource="default" engine="innodb" comment="BitsTree Withdrawal Requests">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="order_id" unsigned="true" nullable="false" comment="Order ID"/>
+        <column xsi:type="varchar" name="order_increment_id" length="32" nullable="false" comment="Order Increment ID"/>
+        <column xsi:type="int" name="customer_id" unsigned="true" nullable="true" comment="Customer ID"/>
+        <column xsi:type="varchar" name="customer_email" length="255" nullable="false" comment="Customer Email"/>
+        <column xsi:type="varchar" name="customer_name" length="255" nullable="false" comment="Customer Name"/>
+        <column xsi:type="varchar" name="shipping_method" length="255" nullable="true" comment="Shipping Method"/>
+        <column xsi:type="text" name="items_data" nullable="true" comment="Withdrawn Items JSON"/>
+        <column xsi:type="varchar" name="status" length="32" nullable="false" default="pending" comment="Status"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="BITSTREE_WITHDRAWAL_ORDER_ID_SALES_ORDER_ENTITY_ID"
+                    table="bitstree_withdrawal" column="order_id"
+                    referenceTable="sales_order" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="BITSTREE_WITHDRAWAL_ORDER_ID" indexType="btree">
+            <column name="order_id"/>
+        </index>
+        <index referenceId="BITSTREE_WITHDRAWAL_STATUS" indexType="btree">
+            <column name="status"/>
+        </index>
+        <index referenceId="BITSTREE_WITHDRAWAL_CUSTOMER_ID" indexType="btree">
+            <column name="customer_id"/>
+        </index>
+    </table>
+</schema>

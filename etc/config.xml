@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+ * Copyright (C) 2026 by BitsTree GmbH - All Rights Reserved
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <bitstree_withdrawal>
+            <general>
+                <enabled>0</enabled>
+                <show_on_order_list>1</show_on_order_list>
+                <show_on_order_view>1</show_on_order_view>
+                <sku_regex><![CDATA[^[^1]]]></sku_regex>
+                <auto_creditmemo>0</auto_creditmemo>
+            </general>
+            <period>
+                <period_start_from>order_date</period_start_from>
+                <default_period>14</default_period>
+                <delivery_date_attribute>c_delivery_date</delivery_date_attribute>
+                <delivery_date_period>14</delivery_date_period>
+                <no_delivery_date_method>homedelivery_other</no_delivery_date_method>
+                <no_delivery_date_period>20</no_delivery_date_period>
+            </period>
+            <email>
+                <customer_subject>{{order_id}} + {{customer_id}} - Withdrawal Right</customer_subject>
+                <notify_subject>{{order_id}} + {{customer_id}} - Withdrawal Right</notify_subject>
+                <sender>general</sender>
+                <customer_template>bitstree_withdrawal_email_customer_template</customer_template>
+                <notify_template>bitstree_withdrawal_email_notify_template</notify_template>
+            </email>
+        </bitstree_withdrawal>
+    </default>
+</config>

@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<!--
+ * Copyright (C) 2026 by BitsTree GmbH - All Rights Reserved
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="bitstree_withdrawal" translate="label" type="text" sortOrder="320"
+                 showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Withdrawal</label>
+            <tab>sales</tab>
+            <resource>BitsTree_Withdrawal::config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10"
+                   showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Withdrawal</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="show_on_order_list" translate="label" type="select" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show on Order List</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="show_on_order_view" translate="label" type="select" sortOrder="30"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show on Order Detail</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="sku_regex" translate="label comment" type="text" sortOrder="40"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>SKU Regex Pattern</label>
+                    <comment><![CDATA[Regex pattern to determine eligible SKUs for withdrawal. E.g. <code>^[^1]</code> matches SKUs not starting with "1". Leave empty to allow all SKUs.]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="auto_creditmemo" translate="label comment" type="select" sortOrder="50"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Automatic Credit Memo</label>
+                    <comment>Automatically create a credit memo for eligible items when a withdrawal is submitted.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="period" translate="label" type="text" sortOrder="20"
+                   showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Withdrawal Period</label>
+                <field id="period_start_from" translate="label comment" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Period Start From</label>
+                    <comment>Determines the starting point for the withdrawal period calculation.</comment>
+                    <source_model>BitsTree\Withdrawal\Model\Config\Source\PeriodStartFrom</source_model>
+                </field>
+                <field id="default_period" translate="label comment" type="text" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Withdrawal Period (Days)</label>
+                    <comment>Default number of days for the withdrawal period. Used as fallback if no shipping method specific period is configured.</comment>
+                    <validate>validate-digits validate-greater-than-zero</validate>
+                </field>
+                <field id="delivery_date_attribute" translate="label comment" type="text" sortOrder="23"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Delivery Date Order Attribute</label>
+                    <comment>Order attribute code containing the delivery date (e.g. c_delivery_date). If configured and the attribute has a value, the withdrawal period starts from this date. Leave empty to disable.</comment>
+                </field>
+                <field id="delivery_date_period" translate="label comment" type="text" sortOrder="25"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Delivery Date Withdrawal Period (Days)</label>
+                    <comment>Withdrawal period in days when the order has a delivery date. The period starts from the delivery date. Leave empty to use the default period.</comment>
+                    <validate>validate-digits validate-greater-than-zero</validate>
+                </field>
+                <field id="no_delivery_date_method" translate="label comment" type="text" sortOrder="27"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>No Delivery Date Shipping Method</label>
+                    <comment><![CDATA[Shipping method code for orders without a suitable delivery date (e.g. <code>homedelivery_other</code>). Leave empty to disable.]]></comment>
+                </field>
+                <field id="no_delivery_date_period" translate="label comment" type="text" sortOrder="28"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>No Delivery Date Withdrawal Period (Days)</label>
+                    <comment>Withdrawal period in days for orders where no suitable delivery date was selected.</comment>
+                    <validate>validate-digits validate-greater-than-zero</validate>
+                </field>
+                <field id="shipping_method_periods" translate="label comment" type="text" sortOrder="30"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Withdrawal Period per Shipping Method</label>
+                    <comment>Configure individual withdrawal periods per shipping method. Fallback to default period if not configured.</comment>
+                    <frontend_model>BitsTree\Withdrawal\Block\Adminhtml\Form\Field\ShippingMethodPeriods</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+            </group>
+            <group id="email" translate="label" type="text" sortOrder="30"
+                   showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Email</label>
+                <field id="customer_subject" translate="label comment" type="text" sortOrder="5"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Customer Email Subject</label>
+                    <comment><![CDATA[Subject line for the customer withdrawal email. Available placeholders: <code>{{order_id}}</code>, <code>{{customer_id}}</code>, <code>{{customer_name}}</code>]]></comment>
+                </field>
+                <field id="notify_subject" translate="label comment" type="text" sortOrder="6"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Notification Email Subject</label>
+                    <comment><![CDATA[Subject line for the store notification email. Available placeholders: <code>{{order_id}}</code>, <code>{{customer_id}}</code>, <code>{{customer_name}}</code>]]></comment>
+                </field>
+                <field id="notification_emails" translate="label comment" type="text" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Notification Email Recipients</label>
+                    <comment>Comma-separated list of email addresses to receive withdrawal notifications.</comment>
+                </field>
+                <field id="sender" translate="label" type="select" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+                <field id="customer_template" translate="label" type="select" sortOrder="30"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Customer Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="notify_template" translate="label" type="select" sortOrder="40"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Store Notification Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

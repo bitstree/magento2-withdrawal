@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+ * Copyright (C) 2026 by BitsTree GmbH - All Rights Reserved
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="bitstree_withdrawal_email_customer_template"
+              label="Withdrawal - Customer Notification"
+              file="withdrawal_customer.html"
+              type="html"
+              module="BitsTree_Withdrawal"
+              area="frontend"/>
+    <template id="bitstree_withdrawal_email_notify_template"
+              label="Withdrawal - Store Notification"
+              file="withdrawal_notify.html"
+              type="html"
+              module="BitsTree_Withdrawal"
+              area="frontend"/>
+</config>

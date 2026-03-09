@@ -1,0 +1,39 @@
+<!--@subject {{var email_subject}} @-->
+<!--@vars {
+"var email_subject":"Email Subject",
+"var order_increment_id":"Order Increment ID",
+"var customer_id":"Customer ID",
+"var customer_name":"Customer Name",
+"var customer_email":"Customer Email",
+"var items_data":"Withdrawn Items (JSON)",
+"var withdrawal_date":"Withdrawal Date",
+"var store":"Store"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-intro">
+        <td>
+            <p class="greeting">{{trans "Withdrawal Notification"}}</p>
+            <p>
+                {{trans "A customer has submitted a withdrawal request."}}
+            </p>
+            <p>
+                {{trans "I exercise my right of withdrawal, as I have the right to withdraw from this contract within fourteen days without giving any reason. The right of withdrawal does not apply to distance contracts for the delivery of goods which are liable to deteriorate or expire rapidly; for the delivery of food and beverages; for the delivery of sealed goods which are not suitable for return due to health protection or hygiene reasons, if the seal has been removed. Resch&Frisch may contact me to arrange the return of goods (excluding baked goods)."}}
+            </p>
+        </td>
+    </tr>
+    <tr class="email-information">
+        <td>
+            <p><strong>{{trans "Order"}}:</strong> {{var order_increment_id}}</p>
+            <p><strong>{{trans "Customer ID"}}:</strong> {{var customer_id}}</p>
+            <p><strong>{{trans "Customer Name"}}:</strong> {{var customer_name}}</p>
+            <p><strong>{{trans "Customer Email"}}:</strong> {{var customer_email}}</p>
+            <p><strong>{{trans "Date"}}:</strong> {{var withdrawal_date}}</p>
+            <p><strong>{{trans "Items"}}:</strong> {{var items_data}}</p>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

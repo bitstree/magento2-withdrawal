@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+ * Copyright (C) 2026 by BitsTree GmbH - All Rights Reserved
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="BitsTree_Withdrawal::css/withdrawal.css"/>
+    </head>
+    <body>
+        <referenceBlock name="sales.order.info.buttons">
+            <block class="BitsTree\Withdrawal\Block\Order\WithdrawalButton"
+                   name="bitstree.withdrawal.button"
+                   template="BitsTree_Withdrawal::order/withdrawal-button.phtml"/>
+        </referenceBlock>
+    </body>
+</page>

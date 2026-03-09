@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+ * Copyright (C) 2026 by BitsTree GmbH - All Rights Reserved
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="BitsTree_Withdrawal::withdrawals"
+             title="Withdrawals"
+             module="BitsTree_Withdrawal"
+             sortOrder="30"
+             parent="Magento_Sales::sales"
+             action="bitstree_withdrawal/index/index"
+             resource="BitsTree_Withdrawal::withdrawals"/>
+    </menu>
+</config>
