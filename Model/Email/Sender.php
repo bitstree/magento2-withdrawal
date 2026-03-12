@@ -60,6 +60,7 @@ class Sender
             'items_data' => $withdrawal->getItemsData(),
             'withdrawal_date' => $withdrawal->getCreatedAt(),
             'store' => $this->storeManager->getStore($storeId),
+            'company_name' => $this->config->getCompanyName($storeId),
         ];
 
         $sender = $this->config->getEmailSender($storeId);

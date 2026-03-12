@@ -112,8 +112,11 @@ class WithdrawalButton extends Template
      */
     public function getConfirmationMessage(): string
     {
+        $companyName = $this->config->getCompanyName((int) $this->getOrder()?->getStoreId());
+
         return (string) __(
-            'I would like to exercise my <strong>right of withdrawal.</strong><br/><strong>Note:</strong> The right of withdrawal only applies to accessories and the Resch&Frisch oven <strong>(baked goods are excluded from withdrawal).</strong><br/>Resch&Frisch may contact me to arrange the return.'
+            'I would like to exercise my <strong>right of withdrawal.</strong><br/><strong>Note:</strong> The right of withdrawal only applies to accessories and the %1 oven <strong>(baked goods are excluded from withdrawal).</strong><br/>%1 may contact me to arrange the return.',
+            $companyName,
         );
     }
 }

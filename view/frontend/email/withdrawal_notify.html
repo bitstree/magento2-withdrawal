@@ -7,7 +7,8 @@
 "var customer_email":"Customer Email",
 "var items_data":"Withdrawn Items (JSON)",
 "var withdrawal_date":"Withdrawal Date",
-"var store":"Store"
+"var store":"Store",
+"var company_name":"Company Name"
 } @-->
 
 {{template config_path="design/email/header_template"}}
@@ -20,18 +21,16 @@
                 {{trans "A customer has submitted a withdrawal request."}}
             </p>
             <p>
-                {{trans "I exercise my right of withdrawal, as I have the right to withdraw from this contract within fourteen days without giving any reason. The right of withdrawal does not apply to distance contracts for the delivery of goods which are liable to deteriorate or expire rapidly; for the delivery of food and beverages; for the delivery of sealed goods which are not suitable for return due to health protection or hygiene reasons, if the seal has been removed. Resch&Frisch may contact me to arrange the return of goods (excluding baked goods)."}}
+                {{trans "I exercise my"}} <strong>{{trans "right of withdrawal,"}}</strong> {{trans "as I have the right to withdraw from this contract within fourteen days without giving any reason. The right of withdrawal does"}} <strong>{{trans "not"}}</strong> {{trans "apply to distance contracts"}}
             </p>
-        </td>
-    </tr>
-    <tr class="email-information">
-        <td>
-            <p><strong>{{trans "Order"}}:</strong> {{var order_increment_id}}</p>
-            <p><strong>{{trans "Customer ID"}}:</strong> {{var customer_id}}</p>
-            <p><strong>{{trans "Customer Name"}}:</strong> {{var customer_name}}</p>
-            <p><strong>{{trans "Customer Email"}}:</strong> {{var customer_email}}</p>
-            <p><strong>{{trans "Date"}}:</strong> {{var withdrawal_date}}</p>
-            <p><strong>{{trans "Items"}}:</strong> {{var items_data}}</p>
+            <ul>
+                <li>{{trans "for the delivery of goods which are liable to deteriorate or expire rapidly;"}}</li>
+                <li>{{trans "for the delivery of food and beverages;"}}</li>
+                <li>{{trans "for the delivery of sealed goods which are not suitable for return due to health protection or hygiene reasons, if the seal has been removed."}}</li>
+            </ul>
+            <p>
+                <strong>{{var company_name}}</strong> {{trans "may contact me to arrange the return of goods (excluding baked goods)."}}
+            </p>
         </td>
     </tr>
 </table>

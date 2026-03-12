@@ -11,6 +11,7 @@
                 <show_on_order_list>1</show_on_order_list>
                 <show_on_order_view>1</show_on_order_view>
                 <sku_regex><![CDATA[^[^1]]]></sku_regex>
+                <company_name/>
                 <auto_creditmemo>0</auto_creditmemo>
             </general>
             <period>

@@ -53,6 +53,21 @@ class Config extends AbstractHelper
     }
 
     /**
+     * Get company name for withdrawal texts
+     *
+     * @param int|null $storeId
+     * @return string
+     */
+    public function getCompanyName(?int $storeId = null): string
+    {
+        return (string) $this->scopeConfig->getValue(
+            self::XML_PATH_PREFIX . 'general/company_name',
+            ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
+    }
+
+    /**
      * Check if button should be shown on order list
      *
      * @param int|null $storeId

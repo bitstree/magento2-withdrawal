@@ -34,6 +34,14 @@
                         <field id="enabled">1</field>
                     </depends>
                 </field>
+                <field id="company_name" translate="label comment" type="text" sortOrder="35"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Company Name</label>
+                    <comment>Company name used in withdrawal confirmation dialogs and email templates.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
                 <field id="sku_regex" translate="label comment" type="text" sortOrder="40"
                        showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>SKU Regex Pattern</label>
