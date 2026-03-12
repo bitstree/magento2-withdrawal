@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+ * Copyright (C) 2026 by BitsTree GmbH - All Rights Reserved
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/withdrawal/order/:orderId" method="POST">
+        <service class="BitsTree\Withdrawal\Api\WithdrawalManagementInterface" method="createByOrderId"/>
+        <resources>
+            <resource ref="BitsTree_Withdrawal::withdrawals"/>
+        </resources>
+    </route>
+    <route url="/V1/withdrawal/mine/order/:orderId" method="POST">
+        <service class="BitsTree\Withdrawal\Api\WithdrawalManagementInterface" method="createByOrderIdForCustomer"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/withdrawal/mine/eligible-orders" method="GET">
+        <service class="BitsTree\Withdrawal\Api\WithdrawalManagementInterface" method="getEligibleOrders"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+</routes>

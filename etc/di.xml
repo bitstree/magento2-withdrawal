@@ -8,6 +8,8 @@
                 type="BitsTree\Withdrawal\Model\Withdrawal"/>
     <preference for="BitsTree\Withdrawal\Api\WithdrawalRepositoryInterface"
                 type="BitsTree\Withdrawal\Model\WithdrawalRepository"/>
+    <preference for="BitsTree\Withdrawal\Api\WithdrawalManagementInterface"
+                type="BitsTree\Withdrawal\Model\WithdrawalManagement"/>
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">

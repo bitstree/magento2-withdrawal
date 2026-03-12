@@ -88,6 +88,59 @@ The withdrawal period is determined in the following order:
 | Customer Email Template | Email template for the customer |
 | Store Notification Email Template | Email template for store notifications |
 
+## REST API
+
+The module provides REST API endpoints for programmatic withdrawal management.
+
+### Admin Endpoints
+
+Requires an admin integration token with `BitsTree_Withdrawal::withdrawals` ACL permission.
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/V1/withdrawal/order/:orderId` | Create a withdrawal for any order |
+
+**Example:**
+
+```bash
+# Get admin token
+TOKEN=$(curl -s -X POST "https://magento.test/rest/V1/integration/admin/token" \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","password":"admin123"}')
+
+# Create withdrawal for order 42
+curl -X POST "https://magento.test/rest/V1/withdrawal/order/42" \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json"
+```
+
+### Customer Endpoints
+
+Requires a customer token (resource: `self`). The customer ID is automatically resolved from the token.
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/V1/withdrawal/mine/eligible-orders` | List orders eligible for withdrawal |
+| `POST` | `/V1/withdrawal/mine/order/:orderId` | Create a withdrawal for an own order |
+
+**Example:**
+
+```bash
+# Get customer token
+TOKEN=$(curl -s -X POST "https://magento.test/rest/V1/integration/customer/token" \
+  -H "Content-Type: application/json" \
+  -d '{"username":"customer@example.com","password":"Password123"}')
+
+# List eligible orders
+curl -X GET "https://magento.test/rest/V1/withdrawal/mine/eligible-orders" \
+  -H "Authorization: Bearer $TOKEN"
+
+# Create withdrawal for own order 42
+curl -X POST "https://magento.test/rest/V1/withdrawal/mine/order/42" \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json"
+```
+
 ## Database
 
 The module creates a `bitstree_withdrawal` table to store withdrawal requests. The schema is defined in `etc/db_schema.xml` and applied automatically during `setup:upgrade`.
