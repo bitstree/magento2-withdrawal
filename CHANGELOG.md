@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-03-12
+
+### Added
+- REST API for withdrawal management (`etc/webapi.xml`)
+  - `POST /V1/withdrawal/order/:orderId` — Admin: create withdrawal for any order
+  - `POST /V1/withdrawal/mine/order/:orderId` — Customer: create withdrawal for own order
+  - `GET /V1/withdrawal/mine/eligible-orders` — Customer: list orders eligible for withdrawal
+- `WithdrawalManagementInterface` service contract with `createByOrderId`, `createByOrderIdForCustomer`, and `getEligibleOrders`
+- Configurable **Company Name** setting (`general/company_name`) to replace hardcoded company references in confirmation dialogs and email templates
+- REST API documentation section in README
+
+### Changed
+- Refactored `Controller/Index/Submit` to delegate business logic to `WithdrawalManagement` service
+- Email templates now use `{{var company_name}}` template variable instead of hardcoded company name
+
 ## [1.0.0] - 2026-03-09
 
 ### Added
