@@ -230,7 +230,7 @@ class Config extends AbstractHelper
      * @param int|null $storeId
      * @return int
      */
-    public function getWithdrawalPeriodForMethod(?string $shippingMethod, ?int $storeId = null): int
+    public function getWithdrawalPeriodForMethod(?string $shippingMethod, ?int $storeId = null, ?bool $returnDefaultWithdrawalPeriodDays = false): int
     {
         if ($shippingMethod === null) {
             return $this->getDefaultWithdrawalPeriodDays($storeId);
@@ -259,7 +259,10 @@ class Config extends AbstractHelper
             }
         }
 
-        return $this->getDefaultWithdrawalPeriodDays($storeId);
+        if ($returnDefaultWithdrawalPeriodDays) {
+            return $this->getDefaultWithdrawalPeriodDays($storeId);
+        }
+        return 0;
     }
 
     /**
@@ -407,7 +410,10 @@ class Config extends AbstractHelper
 
         if ($deliveryDate) {
             $startDate = $deliveryDate;
-            $periodDays = $this->getDeliveryDatePeriodDays($storeId);
+            $periodDays = $this->getWithdrawalPeriodForMethod($order->getShippingMethod(), $storeId, false);
+            if ($periodDays === 0) {
+                $periodDays = $this->getDeliveryDatePeriodDays($storeId);
+            }
         } else {
             $startFrom = $this->getPeriodStartFrom($storeId);
             $periodDays = $this->getWithdrawalPeriodForMethod($order->getShippingMethod(), $storeId);
