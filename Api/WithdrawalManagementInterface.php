@@ -30,10 +30,10 @@ interface WithdrawalManagementInterface
      * Create a withdrawal for the given order
      *
      * @param int $orderId
-     * @return WithdrawalInterface
-     * @throws NoSuchEntityException
-     * @throws LocalizedException
-     * @throws CouldNotSaveException
+     * @return \BitsTree\Withdrawal\Api\Data\WithdrawalInterface
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Magento\Framework\Exception\CouldNotSaveException
      */
     public function createByOrderId(int $orderId): WithdrawalInterface;
 
@@ -42,10 +42,10 @@ interface WithdrawalManagementInterface
      *
      * @param int $customerId
      * @param int $orderId
-     * @return WithdrawalInterface
-     * @throws NoSuchEntityException
-     * @throws LocalizedException
-     * @throws CouldNotSaveException
+     * @return \BitsTree\Withdrawal\Api\Data\WithdrawalInterface
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Magento\Framework\Exception\CouldNotSaveException
      */
     public function createByOrderIdForCustomer(
         int $customerId,
@@ -56,7 +56,7 @@ interface WithdrawalManagementInterface
      * Get orders eligible for withdrawal for the given customer
      *
      * @param int $customerId
-     * @return OrderInterface[]
+     * @return \Magento\Sales\Api\Data\OrderInterface[]
      */
     public function getEligibleOrders(int $customerId): array;
 }
