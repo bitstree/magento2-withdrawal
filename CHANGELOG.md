@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.2] - 2026-04-01
+
+### Fixed
+- PHPDoc annotations in `WithdrawalManagementInterface` now use fully qualified class names (FQCNs) for `@return` and `@throws` tags, ensuring correct Magento REST API schema generation via reflection
+
 ## [1.1.1] - 2026-03-23
 
 ### Fixed
