@@ -456,7 +456,7 @@ class Config extends AbstractHelper
         $items = [];
 
         foreach ($order->getAllVisibleItems() as $item) {
-            if ($pattern === '' || preg_match('/' . $pattern . '/', $item->getSku())) {
+            if ($pattern === null || $pattern === '' || preg_match('/' . $pattern . '/', $item->getSku())) {
                 $items[] = $item;
             }
         }
